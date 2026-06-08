@@ -10,4 +10,5 @@ python3.12 manage.py collectstatic --noinput --clear
 
 echo "Make Migrations..."
 python3.12 manage.py makemigrations --noinput
-python3.12 manage.py migrate --noinput
+python3.12 manage.py migrate --noinput || echo "Migration skipped or failed (this is normal if DB is not accessible during build)"
+

@@ -80,18 +80,17 @@ WSGI_APPLICATION = 'mars_coffee_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Menggunakan DATABASE_URL dari environment variable (Vercel Postgres)
-# Jika tidak ada (di lokal), akan menggunakan SQLite sebagai cadangan
+# Menggunakan PostgreSQL melalui DATABASE_URL (Wajib ada di Environment Variable)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'marscoffee',    # Masukkan nama database yang baru Anda buat
-        'USER': 'postgres',              # Username bawaan PostgreSQL
-        'PASSWORD': 'welcome1',          # Password baru yang sudah Anda setel tadi
-        'HOST': '127.0.0.1',             # Mengarah ke localhost WSL
-        'PORT': '5432',                  # Port bawaan PostgreSQL
-    }
+    'default': dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
+
+# Pastikan ada peringatan jika DATABASE_URL tidak ditemukan
+if not DATABASES['default']:
+    raise Exception("DATABASE_URL tidak ditemukan! Pastikan sudah disetel di Vercel atau file .env")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
