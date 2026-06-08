@@ -77,27 +77,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mars_coffee_project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
-# Cek apakah kita di Vercel (Production) atau Lokal
-DATABASE_URL = os.environ.get('POSTGRES_URL') or os.environ.get('DATABASE_URL')
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=DATABASE_URL,
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
-
-# Jika DATABASE_URL tidak ada sama sekali, gunakan SQLite (hanya untuk darurat lokal)
-if not DATABASES['default']:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DATABASE_URL:
+    # Menggunakan Database Cloud jika ada URL terdeteksi (Untuk Vercel & Proses Migrate Cloud)
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True
+        )
     }
-
+else:
+    # Menggunakan Database Lokal WSL jika dijalankan biasa di komputer Anda tanpa variabel (Runserver lokal)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'marscoffee',        # Nama database lokal Anda
+            'USER': 'postgres',
+            'PASSWORD': 'welcome1',
+            'HOST': '127.0.0.1',         
+            'PORT': '5432',
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
