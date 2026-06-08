@@ -1,0 +1,202 @@
+{% extends 'cafe/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="home" class="p-0 position-relative">
+    <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-dark" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; min-height: 100vh; display: flex; align-items: center;">
+        <div class="container z-index-1">
+            <div class="col-md-8 p-lg-5 mx-auto my-5">
+                <h1 class="display-2 fw-bold mb-4" data-aos="zoom-out" data-aos-duration="1500">Escape to the <span class="text-latte">Red Planet</span> of Flavor</h1>
+                <p class="lead fw-normal mb-5 opacity-75" data-aos="fade-up" data-aos-delay="300">Experience the finest coffee beans and gourmet treats at Mars Coffee & Eatery. Your daily orbit starts here.</p>
+                <div data-aos="fade-up" data-aos-delay="600">
+                    <a class="btn btn-primary btn-lg rounded-pill me-3 mb-3" href="#menu">Explore Menu</a>
+                    <a class="btn btn-outline-light btn-lg rounded-pill mb-3" href="#contact">Find Us</a>
+                </div>
+            </div>
+        </div>
+        <!-- Subtle Scroll Down Indicator -->
+        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4 floating">
+            <a href="#about" class="text-cream opacity-50"><i class="fas fa-chevron-down fa-2x"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- About Us -->
+<section id="about" class="container overflow-hidden">
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-right">
+            <div class="position-relative">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="About Mars Coffee" class="img-fluid rounded-4 shadow-lg">
+                <div class="position-absolute bottom-0 end-0 bg-latte p-4 rounded-start-4 d-none d-md-block" style="margin-bottom: -20px; margin-right: -20px;">
+                    <h3 class="text-espresso m-0">Est. 2026</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 ps-md-5" data-aos="fade-left">
+            <div class="section-title text-start mb-4">
+                <h2 class="display-4">Our Story</h2>
+            </div>
+            <p class="lead text-latte mb-4 italic">"Kopi yang membawa Anda melampaui cakrawala."</p>
+            <p class="opacity-75">Terinspirasi dari keindahan alam semesta, Mars Coffee & Eatery hadir untuk memberikan pengalaman nongkrong yang berbeda. Kami percaya bahwa setiap cangkir kopi memiliki cerita, dan setiap hidangan adalah sebuah karya seni.</p>
+            <p class="opacity-75 mb-5">Dengan desain interior yang modern dan hangat, kami adalah tempat yang sempurna untuk bekerja, bersantai, atau merayakan momen spesial bersama teman dan keluarga.</p>
+            <div class="row g-4">
+                <div class="col-6">
+                    <h5 class="text-latte"><i class="fas fa-leaf me-2"></i>Premium Beans</h5>
+                    <p class="small opacity-50">100% Arabica selection</p>
+                </div>
+                <div class="col-6">
+                    <h5 class="text-latte"><i class="fas fa-wifi me-2"></i>Cozy Space</h5>
+                    <p class="small opacity-50">High-speed internet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Menu Highlights -->
+<section id="menu" class="bg-dark position-relative overflow-hidden">
+    <!-- Subtle Background Element -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-05" style="background-image: radial-gradient(var(--latte) 1px, transparent 1px); background-size: 30px 30px;"></div>
+    
+    <div class="container position-relative">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Our Favorites</h2>
+            <p class="opacity-50">Taste our interstellar signature blends</p>
+        </div>
+        <div class="row g-4 mb-5">
+            {% for item in highlights %}
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+                <div class="card h-100 border-0 shadow">
+                    <div class="position-relative overflow-hidden">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}" style="height: 250px; object-fit: cover; transition: all 0.5s ease;">
+                        {% else %}
+                            {% if forloop.counter == 1 %}
+                                <img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/657208733_18045962444743473_8817929076503866589_n.jpg?stp=dst-jpg_e35_p720x720_tt6&_nc_cat=103&ig_cache_key=Mzg2NDIxMDk3MTYyMDAxNDM3NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Kk8jecYzhosQ7kNvwF-bii9&_nc_oc=AdrMouJyqT-Iy3tvfxwWzwePvFMQqiGJ-n3Huz2wZoeUgzzJreRF6nrepki-Z7D6RBaXnz3KDBxSUF2Xp1W3IYLa&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=eO27_Kn7wgmbUzchuCU1Qg&_nc_ss=7a22e&oh=00_Af8iJutozIcXDufT13dntoYEAdscH1KJP8qlXYO8GvEwLg&oe=6A2C197E" class="card-img-top" alt="Espresso" style="height: 250px; object-fit: cover;">
+                            {% elif forloop.counter == 2 %}
+                                <img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/670497054_18047349635743473_3510223511261809055_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6&_nc_cat=107&ig_cache_key=Mzg3MjA5ODkyMTg3NTc0NTM2NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=6rLRu0ZjfXoQ7kNvwHEocky&_nc_oc=AdrKn_araGWYQNfWqMi6vHED72-zfOy0hMClJJTFon7kjyDbfOFUDKDv_y8x5MXvAtExtDi1hUeLHZMEBwUIduSi&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=EHlsxQlQqWejt3Rzhc6PiA&_nc_ss=7a22e&oh=00_Af-y6Z7o9tU9J063M4Ux6XTKhc7oo0MsyVEAPtakVKcGBg&oe=6A2C1CE3" class="card-img-top" alt="Latte" style="height: 250px; object-fit: cover;">
+                            {% else %}
+                                <img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/590424253_18032897753743473_5990514583144355773_n.webp?stp=dst-webp_p720x720&_nc_cat=103&ig_cache_key=Mzc4MzA1NjAxNDM2NDA1OTc5OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=iWTks2mgpIsQ7kNvwF516gg&_nc_oc=AdqUvq6FiEqZ9abSZEbGOl-vLVwGmvSba01QtQRaUlz7CzJsq7gUfOmW02EqLosW5chtF5JcVocPX80t1Lo3xgEl&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=h4eIItUp55YEdsMqlOtnNw&_nc_ss=7a22e&oh=00_Af-q8zsdl0VSuwWGjw7JuoYGV9BqYdHodBpVAQdyYcEzkQ&oe=6A2C3D37" class="card-img-top" alt="Matcha" style="height: 250px; object-fit: cover;">
+                            {% endif %}
+                        {% endif %}
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-espresso text-latte px-3 py-2 rounded-pill">Must Try</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="card-title mb-0">{{ item.name }}</h4>
+                            <span class="text-latte fw-bold fs-5">Rp {{ item.price }}</span>
+                        </div>
+                        <p class="card-text opacity-75">{{ item.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="opacity-50 italic">Menu andalan akan segera hadir!</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title mb-5">Full Menu</h2>
+        </div>
+        
+        <div class="row g-4">
+            {% for category in categories %}
+            <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="menu-category-card">
+                    <h3 class="text-latte border-bottom border-secondary pb-3 mb-4 d-flex align-items-center">
+                        {% if category.name == 'Coffee' %}
+                            <i class="fas fa-coffee me-3"></i>
+                        {% elif category.name == 'Non-Coffee' %}
+                            <i class="fas fa-glass-martini-alt me-3"></i>
+                        {% else %}
+                            <i class="fas fa-utensils me-3"></i>
+                        {% endif %}
+                        {{ category.name }}
+                    </h3>
+                    <div class="menu-list">
+                        {% for item in category.menus.all %}
+                        <div class="menu-item">
+                            <div class="menu-header">
+                                <span class="menu-name">{{ item.name }}</span>
+                                <span class="menu-dots"></span>
+                                <span class="menu-price">Rp {{ item.price|intcomma }}</span>
+                            </div>
+                            {% if item.description %}
+                                <small class="menu-description">{{ item.description }}</small>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="container overflow-hidden">
+    <div class="section-title" data-aos="fade-up">
+        <h2>Our Ambience</h2>
+        <p class="opacity-50">Peek inside our galaxy of comfort</p>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-4 col-6" data-aos="zoom-in"><img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/681716999_18049563713743473_8523788627826631022_n.webp?stp=dst-webp_p720x720&_nc_cat=111&ig_cache_key=Mzg4NDUzNjk5MjE2MDIyODk4Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=kCdyyTKVkJQQ7kNvwFzkuj2&_nc_oc=AdphpxaHuzLpXdGEezp7nWchlGg9NA3CV23VfV47-v2nCYBeJcREfbT6RgKy6eoo_aATO2CvsQWQH_krOJ739JVq&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=EHlsxQlQqWejt3Rzhc6PiA&_nc_ss=7a22e&oh=00_Af9FjBK9CqNDbsFKtndLk3vqmNuzpSnWyNr_f7wl14nKBw&oe=6A2C2535" class="img-gallery" alt="Gallery 1"></div>
+        <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100"><img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/657208733_18045962444743473_8817929076503866589_n.jpg?stp=dst-jpg_e35_p320x320_tt6&_nc_cat=103&ig_cache_key=Mzg2NDIxMDk3MTYyMDAxNDM3NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Kk8jecYzhosQ7kNvwF-bii9&_nc_oc=AdrMouJyqT-Iy3tvfxwWzwePvFMQqiGJ-n3Huz2wZoeUgzzJreRF6nrepki-Z7D6RBaXnz3KDBxSUF2Xp1W3IYLa&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=eO27_Kn7wgmbUzchuCU1Qg&_nc_ss=7a22e&oh=00_Af9FYipYViv-VC35fbUZ3NYlL3PL0AYQkztXOP0jOlf9jg&oe=6A2C197E" class="img-gallery" alt="Gallery 2"></div>
+        <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="200"><img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/670497054_18047349635743473_3510223511261809055_n.jpg?stp=dst-jpg_e35_p640x640_sh2.08_tt6&_nc_cat=107&ig_cache_key=Mzg3MjA5ODkyMTg3NTc0NTM2NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=6rLRu0ZjfXoQ7kNvwHEocky&_nc_oc=AdrKn_araGWYQNfWqMi6vHED72-zfOy0hMClJJTFon7kjyDbfOFUDKDv_y8x5MXvAtExtDi1hUeLHZMEBwUIduSi&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=EHlsxQlQqWejt3Rzhc6PiA&_nc_ss=7a22e&oh=00_Af-y6Z7o9tU9J063M4Ux6XTKhc7oo0MsyVEAPtakVKcGBg&oe=6A2C1CE3" class="img-gallery" alt="Gallery 3"></div>
+        <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="300"><img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/622722690_18038282450743473_9199758688250603125_n.webp?stp=dst-webp_p640x640_sh2.08&_nc_cat=110&ig_cache_key=MzgxODQ4ODk3Nzk0MzY0MDA3MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=dFf6du2hYlQQ7kNvwHPcg_D&_nc_oc=AdqWjZjs1yhnJ0EtqQ8EVglyCPAhUWRWxmigzUp_A-nslBuCIZyK4G5N9iFpCdy97jH6HazWWLZr4dO8o84yX5Wz&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=h4eIItUp55YEdsMqlOtnNw&_nc_ss=7a22e&oh=00_Af_l6ZO6BszK_QrNKarnS5cJuD3J7K6lajfNEzGp-c8wzA&oe=6A2C229D" class="img-gallery" alt="Gallery 4"></div>
+        <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="400"><img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/616439976_18036972932743473_2295978557379322066_n.webp?_nc_cat=106&ig_cache_key=MzgxMDM4NDQxMTQ1Njk0NDI4Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=2S9jHdrRa1MQ7kNvwEByGDL&_nc_oc=AdqhjG7kglE4zIpYnzG6kWtPA_B29Egi4fWFpDLgEDQbWqSma6gueaY05jLkQACwxuGIhRXasdNhUDQ4ApT14hNN&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=h4eIItUp55YEdsMqlOtnNw&_nc_ss=7a22e&oh=00_Af850yk43Hmdebs7bhuphi1CR5PQgyeH3Mk1TuZc1p_m2w&oe=6A2C33EE" class="img-gallery" alt="Gallery 5"></div>
+        <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="500"><img src="https://instagram.fbdo9-1.fna.fbcdn.net/v/t51.82787-15/715242381_18054618965743473_6624692538952159473_n.webp?stp=dst-webp_p640x640_sh2.08&_nc_cat=104&ig_cache_key=MzkxMTc1NTA4MzU1Nzk3Mzc1NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=kT6DtEgzJZsQ7kNvwEvgMkC&_nc_oc=Ado_T1XhfIvazzY5GeWWzlnVvT3ZGnuXCWioc3oCKWe_9vsQrTqXTt6CMwgi5p8g-DyEckEEP0ueP8LTbiRk9fv1&_nc_ad=z-m&_nc_cid=1225&_nc_zt=23&_nc_ht=instagram.fbdo9-1.fna&_nc_gid=EHlsxQlQqWejt3Rzhc6PiA&_nc_ss=7a22e&oh=00_Af827kpPc1pFzsOV-UbWJF5L6nU4sE8M1whKXY8wMto7qQ&oe=6A2C11E8" class="img-gallery" alt="Gallery 6"></div>
+    </div>
+</section>
+
+<!-- Contact & Location -->
+<section id="contact" class="bg-dark overflow-hidden">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Visit Our Orbit</h2>
+            <p class="opacity-50">We're waiting for your arrival</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 p-4 text-center border-0">
+                    <div class="mb-4">
+                        <i class="fas fa-map-marker-alt fa-3x text-latte"></i>
+                    </div>
+                    <h4>Location</h4>
+                    <p class="opacity-75 mb-4">Jl. Antariksa No. 12, Galaksi Baru, Indonesia</p>
+                    <a href="https://goo.gl/maps/example" class="btn btn-outline-light rounded-pill mt-auto">Open in Maps</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 p-4 text-center border-0">
+                    <div class="mb-4">
+                        <i class="fas fa-clock fa-3x text-latte"></i>
+                    </div>
+                    <h4>Opening Hours</h4>
+                    <div class="opacity-75">
+                        <p class="mb-2"><strong>Monday - Friday</strong><br>08.00 - 22.00</p>
+                        <p class="mb-0"><strong>Saturday - Sunday</strong><br>09.00 - 23.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100 p-4 text-center border-0">
+                    <div class="mb-4">
+                        <i class="fab fa-whatsapp fa-3x text-latte"></i>
+                    </div>
+                    <h4>Reservations</h4>
+                    <p class="opacity-75 mb-4">Book your table or order for delivery.</p>
+                    <a href="https://wa.me/6281234567890" class="btn btn-primary rounded-pill mt-auto"><i class="fab fa-whatsapp me-2"></i>Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
