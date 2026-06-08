@@ -4,3 +4,6 @@ whitenoise
 asgiref
 sqlparse
 tzdata
+psycopg2-binary
+dj-database-url
+python-dotenv

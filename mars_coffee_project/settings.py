@@ -10,7 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+import dj_database_url
+if os.path.exists('.env'):
+    from dotenv import load_dotenv
+    load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,13 +80,18 @@ WSGI_APPLICATION = 'mars_coffee_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Menggunakan DATABASE_URL dari environment variable (Vercel Postgres)
+# Jika tidak ada (di lokal), akan menggunakan SQLite sebagai cadangan
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'marscoffee',    # Masukkan nama database yang baru Anda buat
+        'USER': 'postgres',              # Username bawaan PostgreSQL
+        'PASSWORD': 'welcome1',          # Password baru yang sudah Anda setel tadi
+        'HOST': '127.0.0.1',             # Mengarah ke localhost WSL
+        'PORT': '5432',                  # Port bawaan PostgreSQL
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

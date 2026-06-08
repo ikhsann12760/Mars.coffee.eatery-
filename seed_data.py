@@ -12,44 +12,69 @@ def seed():
     non_coffee, _ = Category.objects.get_or_create(name='Non-Coffee')
     food, _ = Category.objects.get_or_create(name='Food & Snacks')
 
-    # Menu Items
+    # Menu Items - Coffee
     Menu.objects.get_or_create(
-        name='Mars Espresso',
+        name='Mars Latte Art',
         category=coffee,
         price=25000,
-        description='Double shot of our signature blend beans.',
+        description='Diracik dengan ketelitian, dituangkan dengan rasa. Setiap cangkir menghadirkan kehangatan yang tak sekadar dinikmati.',
         is_highlight=True
     )
     Menu.objects.get_or_create(
-        name='Creamy Latte',
+        name='Frozen Caramel Vanilla',
         category=coffee,
         price=32000,
-        description='Smooth espresso with steamed milk and thin foam.',
+        description='Dinginnya memikat, manisnya elegan. Nikmati momen sederhana dengan rasa istimewa dari Frozen Caramel Vanilla.',
         is_highlight=True
     )
+
+    # Menu Items - Non-Coffee
     Menu.objects.get_or_create(
-        name='Matcha Zen',
+        name='Pink Candy',
         category=non_coffee,
         price=35000,
-        description='Premium Uji Matcha with fresh milk.',
+        description='Elegan dalam rasa, lembut dalam setiap lapisan. Memberikan kenyamanan yang membuat hari terasa lebih istimewa.',
         is_highlight=True
     )
     Menu.objects.get_or_create(
-        name='Chocolate Lava Cake',
-        category=food,
-        price=38000,
-        description='Warm chocolate cake with melting center.',
+        name='mojito green apple',
+        category=non_coffee,
+        price=34000,
+        description='Sip slow, feel fresh. Let the chill run through your day, one sip at a time.',
         is_highlight=False
     )
     Menu.objects.get_or_create(
-        name='Truffle Fries',
-        category=food,
-        price=28000,
-        description='Golden fries with truffle oil and parmesan.',
+        name='Teh Telang Sereh',
+        category=non_coffee,
+        price=10000,
+        description='Minuman herbal kaya manfaat yang memadukan bunga telang dengan sereh aroma wangi dan efek relaksasi.',
         is_highlight=False
     )
 
-    print("Seed data created successfully.")
+    # Menu Items - Food
+    Menu.objects.get_or_create(
+        name='Chicken Ramen',
+        category=food,
+        price=38000,
+        description='Ramen ayam dengan kuah kaldu gurih, mi kenyal, dan topping telur serta sayuran segar.',
+        is_highlight=False
+    )
+    Menu.objects.get_or_create(
+        name='Rawon Sapi',
+        category=food,
+        price=28000,
+        description='Daging sapi empuk dengan kuah hitam kluwek khas Jawa Timur yang kaya rempah.',
+        is_highlight=False
+    )
+    Menu.objects.get_or_create(
+        name='Nasi Iga Sambal Ijo',
+        category=food,
+        price=68000,
+        description='Nasi Hangat dengan Perpaduan Iga yang Di Siram Dengan Sambal Cabai Hijau Yang menyegarkan.',
+        is_highlight=True
+    )
+
+    print("Seed data updated successfully with items from screenshot.")
 
 if __name__ == '__main__':
     seed()
