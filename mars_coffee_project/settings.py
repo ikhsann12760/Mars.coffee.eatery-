@@ -80,23 +80,26 @@ WSGI_APPLICATION = 'mars_coffee_project.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
-    # Menggunakan Database Cloud jika ada URL terdeteksi (Untuk Vercel & Proses Migrate Cloud)
+    # Jalur ini akan dieksekusi oleh Vercel atau jika DATABASE_URL ada di .env
+    # SSL hanya diwajibkan jika bukan koneksi ke localhost
+    is_localhost = '127.0.0.1' in DATABASE_URL or 'localhost' in DATABASE_URL
+    
     DATABASES = {
         'default': dj_database_url.config(
             default=DATABASE_URL,
             conn_max_age=600,
-            ssl_require=True
+            ssl_require=not is_localhost
         )
     }
 else:
-    # Menggunakan Database Lokal WSL jika dijalankan biasa di komputer Anda tanpa variabel (Runserver lokal)
+    # Jalur cadangan jika DATABASE_URL tidak disetel sama sekali
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'marscoffee',        # Nama database lokal Anda
+            'NAME': 'marscoffee',
             'USER': 'postgres',
             'PASSWORD': 'welcome1',
-            'HOST': '127.0.0.1',         
+            'HOST': '127.0.0.1',
             'PORT': '5432',
         }
     }
