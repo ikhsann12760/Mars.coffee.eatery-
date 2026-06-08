@@ -80,17 +80,23 @@ WSGI_APPLICATION = 'mars_coffee_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Menggunakan PostgreSQL melalui DATABASE_URL (Wajib ada di Environment Variable)
+# Cek apakah kita di Vercel (Production) atau Lokal
+DATABASE_URL = os.environ.get('POSTGRES_URL') or os.environ.get('DATABASE_URL')
+
 DATABASES = {
     'default': dj_database_url.config(
+        default=DATABASE_URL,
         conn_max_age=600,
         conn_health_checks=True,
     )
 }
 
-# Pastikan ada peringatan jika DATABASE_URL tidak ditemukan
+# Jika DATABASE_URL tidak ada sama sekali, gunakan SQLite (hanya untuk darurat lokal)
 if not DATABASES['default']:
-    raise Exception("DATABASE_URL tidak ditemukan! Pastikan sudah disetel di Vercel atau file .env")
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
