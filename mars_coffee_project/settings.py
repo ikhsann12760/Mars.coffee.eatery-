@@ -77,22 +77,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mars_coffee_project.wsgi.application'
 
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# Database
+# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if DATABASE_URL:
-    # Jalur ini akan dieksekusi oleh Vercel atau jika DATABASE_URL ada di .env
-    # SSL hanya diwajibkan jika bukan koneksi ke localhost
-    is_localhost = '127.0.0.1' in DATABASE_URL or 'localhost' in DATABASE_URL
+# Ambil URL database dari Vercel (POSTGRES_URL atau DATABASE_URL)
+DB_URL = os.environ.get('POSTGRES_URL') or os.environ.get('DATABASE_URL')
+
+if DB_URL:
+    # Jalur ini untuk Vercel (Production)
+    # Cek apakah ini ke localhost (untuk mematikan SSL jika di lokal via .env)
+    is_localhost = '127.0.0.1' in DB_URL or 'localhost' in DB_URL
     
     DATABASES = {
         'default': dj_database_url.config(
-            default=DATABASE_URL,
+            default=DB_URL,
             conn_max_age=600,
             ssl_require=not is_localhost
         )
     }
 else:
-    # Jalur cadangan jika DATABASE_URL tidak disetel sama sekali
+    # Jalur cadangan murni jika tidak ada variabel lingkungan sama sekali (Localhost)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
